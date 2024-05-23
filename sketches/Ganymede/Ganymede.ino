@@ -25,13 +25,22 @@ void loop(){
   unsigned long ts = millis();
   unsigned long itv;
 
+  // compute interval since last check
   if (ts >= lastClockCheck)
     itv = ts - lastClockCheck;
   else
+    // rollover occurred, compute interval accordingly
     itv = UINT32_MAX - lastClockCheck + ts + 1;
 
+  // do its job only if interval is sufficient
   if (itv >= CLOCK_CHECK_INTERVAL){
     Serial.printf("Loop... %i\n", lastClockCheck);
+
+    // TODO:
+    //  - get all sensor values
+    //  - send them to base station
+    //  - sleep
+
     lastClockCheck = millis();
   }
 }
