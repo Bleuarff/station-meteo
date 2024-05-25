@@ -110,5 +110,12 @@ void getAHTValues() {
 
   long sh = (res[1] << 12) | (res[2] << 4) | (res[3] >> 4);
   float humid = (float)sh / 1048576 * 100;
-  Serial.printf("Humidity: %2.1f%%\n", humid);
+  // Serial.printf("Humidity: %2.1f%%\n", humid);
+
+  byte msb = res[3]<<4;
+  long th = (msb<<12) | (res[4]<<8) | res[5];
+  float temp = (float)th / 1048576 * 200 - 50;
+  // Serial.printf("%d %d %d - %d - %d\n", res[3], res[4], res[5], msb, th);
+  
+  Serial.printf("Temp: %2.1f°\tHumidity: %2.1f%%\n", temp);
 }
