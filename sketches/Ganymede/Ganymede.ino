@@ -24,9 +24,8 @@ float temp, humid;
 void setup() {
   Serial.begin(115200);
   Wire.begin();
-  delay(5000);
+  delay(2000);
   Serial.println("** Ganymede starting **");
-  lastClockCheck = millis();
 
   uint8_t error = AHT20::init();
   AHTReady = (error == 0);

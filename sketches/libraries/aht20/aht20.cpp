@@ -21,21 +21,22 @@ uint8_t AHT20::init(){
 
   // unexpected bytes receive
   if (c != 1) {
-    // Serial.printf("AHT returns %i bytes, expected 1.\n", c);
+    Serial.printf("AHT returns %i bytes, expected 1.\n", c);
     return -1;
   }
 
   if (Wire.available() == 0) {
-    // Serial.println("AHT is not available");
+    Serial.println("AHT is not available");
     return -2;
   }
 
   byte status = Wire.read();
-  // Serial.printf("AHT status: %i\n", status);
 
   // Calibration required
-  if (status != AHT20::STATUS_OK)
+  if (status != AHT20::STATUS_OK){
+    Serial.printf("AHT20 status: %i\n", status);
     return -3;
+  }
 
   delay(10);
   return 0;
@@ -58,14 +59,12 @@ void AHT20::getValues(float *temp, float *humid){
     res[i++] = Wire.read();
   }
 
+  // merge bytes to obtain a 20-bit value
   long sh = (res[1] << 12) | (res[2] << 4) | (res[3] >> 4);
   *humid = (float)sh / 1048576 * 100;
-  // // Serial.printf("Humidity: %2.1f%%\n", humid);
 
+  // merge to 20-bit value
   byte msb = res[3]<<4; // take lower 4 bits, remove the humidity portion
   long th = (msb<<12) | (res[4]<<8) | res[5];
   *temp = (float)th / 1048576 * 200 - 50;
-  // // Serial.printf("%d %d %d - %d - %d\n", res[3], res[4], res[5], msb, th);
-  
-  // Serial.printf("Temp: %2.1f°\tHumidity: %2.1f%%\n", temp);
 }
