@@ -44,7 +44,6 @@ void loop() {
 
   // do its job only if interval is sufficient
   if (itv >= CLOCK_CHECK_INTERVAL) {
-    // Serial.printf("Loop... %i\n", lastClockCheck);
 
     // TODO:
     //  - get all sensor values
