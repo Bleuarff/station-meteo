@@ -38,14 +38,17 @@ uint8_t AHT20::init(){
     return -3;
   }
 
+  // delay after status before sending command
   delay(10);
   return 0;
 }
 
 // Get readings from sensor and convert to meaningful values
 void AHT20::getValues(float *temp, float *humid){
-  Wire.beginTransmission(AHT20::I2C_ADDR);
+  // measurement trigger command + 2 bytes of parameters
   byte cmd[3] = { 0xAC, 0x33, 0x00 };
+
+  Wire.beginTransmission(AHT20::I2C_ADDR);
   Wire.write(cmd, 3);
   Wire.endTransmission();
 
@@ -55,6 +58,7 @@ void AHT20::getValues(float *temp, float *humid){
   byte res[7];
   byte i = 0;
   Wire.requestFrom(AHT20::I2C_ADDR, (uint8_t)7);
+
   while (Wire.available()) {
     res[i++] = Wire.read();
   }
