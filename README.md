@@ -21,6 +21,7 @@ Comprises:
 - code
 - assembly
 - shells
+- PCB
 
 # BOM
 
