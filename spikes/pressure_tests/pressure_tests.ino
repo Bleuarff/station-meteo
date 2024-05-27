@@ -3,106 +3,109 @@
 */
 
 #include <Wire.h>
-// #include <lps22.h>
+#include <lps22.h>
 
 uint8_t addr = 0x5D;
 
-void setup(){
+LPS22HB lps22;
+
+void setup() {
   Serial.begin(115200);
   Wire.begin();
 
-  delay(4000);
+  delay(6000);
   Serial.println("--LPS22HB Tests--");
 
+  lps22.begin();
+  Serial.println("LPS22 OK");
+
   // set low power mode
-  Wire.beginTransmission(addr);
-	Wire.write(0x1A);
-	Wire.write(0x0);
-	Wire.endTransmission();
+  // Wire.beginTransmission(addr);
+  // Wire.write(0x1A);
+  // Wire.write(0x0);
+  // Wire.endTransmission();
 
-  // set REG1 register with default values
-  Wire.beginTransmission(addr);
-	Wire.write(0x10);
-	Wire.write(0x0);
-	Wire.endTransmission();
+  // // set REG1 register with default values
+  // Wire.beginTransmission(addr);
+  // Wire.write(0x10);
+  // Wire.write(0x0);
+  // Wire.endTransmission();
 }
 
-void showArray(byte arr[], int len){
-  byte i;
-  for (i = 0; i < len; i++){
-    Serial.printf(" %x", arr[i]);
-  }
-  Serial.print("  ");
-}
+// void showArray(byte arr[], int len) {
+//   byte i;
+//   for (i = 0; i < len; i++) {
+//     Serial.printf(" %x", arr[i]);
+//   }
+//   Serial.print("  ");
+// }
 
-void loop(){
-  
+void loop() {
 
-  float p = readPressure();
-  float t = readTemp();
-  Serial.printf("P: %4.1f hPa\tT: %2.1f\n", p, t);
+  // Serial.println("Run loop");
+  float pressure, temp;
+  lps22.getValues(&pressure, &temp);
+  Serial.printf("P: %4.1f hPa\tT: %2.1f\n", pressure, temp);
+
+  // // float p = readPressure();
+  // // float t = readTemp();
 
   delay(4000);
 }
 
-float readPressure() {
-	// write(LPS22HB_CTRL_REG2, 0x1);
+// float readPressure() {
+// 	// write(LPS22HB_CTRL_REG2, 0x1);
 
-  // configure one-shot mode
-  Wire.beginTransmission(addr);
-	Wire.write(0x11);
-	Wire.write(0x1);
-	Wire.endTransmission();
+//   // configure one-shot mode
+//   // Wire.beginTransmission(addr);
+// 	// Wire.write(0x11);
+// 	// Wire.write(0x1);
+// 	// Wire.endTransmission();
 
-	if (status(0x1) < 0)
-		return 1.23;
-	//delay(50);
-	uint8_t pressOutXL = read(0x28);
-	uint8_t pressOutL = read(0x29);
-	uint8_t pressOutH = read(0x2A);
+// 	if (status(0x1) < 0)
+// 		return 1.23;
 
-	long val = ((long)pressOutH << 16) | ((long)pressOutL << 8) | (long)pressOutXL;
-	//if (val == 1.00) readPressure();
-	return val/4096.0f;
-}
+//   // uint8_t buf[3];
+//   // read(0x28, buf, 3);
+//   // long val = ((long)buf[2] << 16) | ((long)buf[1] << 8) | (long)buf[0];
+// 	uint8_t pressOutXL = read(0x28);
+// 	uint8_t pressOutL = read(0x29);
+// 	uint8_t pressOutH = read(0x2A);
 
-float readTemp(){
-  // configure one-shot mode
-  Wire.beginTransmission(addr);
-	Wire.write(0x11);
-	Wire.write(0x1);
-	Wire.endTransmission();
+// 	long val = ((long)pressOutH << 16) | ((long)pressOutL << 8) | (long)pressOutXL;
+// 	//if (val == 1.00) readPressure();
+// 	return val/4096.0f;
+// }
 
-  if (status(0x2) < 0)
-		return 4.56;
+// float readTemp(){
+//   // trigger one-shot mode
+//   Wire.beginTransmission(addr);
+// 	Wire.write(0x11);
+// 	Wire.write(0x1);
+// 	Wire.endTransmission();
 
-  uint8_t tempOutH = read(0x2c);
-	uint8_t tempOutL = read(0x2b);
+//   if (status(0x2) < 0)
+// 		return 4.56;
 
-	int16_t val = (tempOutH << 8) | (tempOutL & 0xff);
-	return ((float)val)/100.0f;
-}
+//   // uint8_t buf[2] = {0, 0};
+//   // read(0x2b, buf, 2);
+//   // int16_t val = (buf[1] << 8) | (buf[0] & 0xff);
 
-uint8_t read(uint8_t reg) {
-	Wire.beginTransmission(addr);
-	Wire.write(reg);
-	Wire.endTransmission();
-	Wire.requestFrom(addr, (byte)1);
-	return Wire.read();
-}
+//   uint8_t tempOutH = read(0x2c);
+// 	uint8_t tempOutL = read(0x2b);
+// 	int16_t val = (tempOutH << 8) | (tempOutL & 0xff);
 
-uint8_t status(uint8_t status) {
-	int count = 1000;
-	uint8_t data = 0xff;
-	do {
-		data = read(0x27);
-		--count;
-		if (count < 0)
-			break;
-	} while ((data & status) == 0);
+// 	return ((float)val)/100.0f;
+// }
 
-	if (count < 0)
-		return -1;
-	else
-		return 0;
-}
+// void read(uint8_t reg, uint8_t buf[], uint8_t len){
+//   Wire.beginTransmission(addr);
+//   Wire.write(reg);
+//   Wire.endTransmission();
+//   Wire.requestFrom(addr, len);
+
+//   uint8_t i = 0;
+//   while(Wire.available()){
+//     buf[i++] = Wire.read();
+//   }
+// }
