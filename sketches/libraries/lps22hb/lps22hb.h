@@ -2,11 +2,8 @@
   Interact with LPS22HB pressure sensor.
 */
 
-
 #ifndef lps22hb_h
 #define lps22hb_h
-
-#include "Arduino.h"
 
 #define LPS22HB_RES_CONF	0X1A //Normal (0) or Low current mode (1)
 

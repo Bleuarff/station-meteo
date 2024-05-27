@@ -5,8 +5,6 @@
 #ifndef aht20_h
 #define aht20_h
 
-#include "Arduino.h"
-
 class AHT20 {
   private:
     static const uint8_t I2C_ADDR = 0x38;
