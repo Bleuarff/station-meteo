@@ -7,13 +7,16 @@
 
 #include "Arduino.h"
 
+// Sensor i2c address
+#define AHT20_I2C_ADDR 0x38
+
 class AHT20 {
   private:
-    static uint8_t I2C_ADDR;
     static uint8_t STATUS_OK;
   public:
-    static uint8_t init();
-    static void getValues(float *temp, float *humid);
+    AHT20();
+    uint8_t begin();
+    void getValues(float *temp, float *humid);
 };
 
 #endif

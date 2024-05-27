@@ -8,16 +8,17 @@
 #include "Wire.h"
 #include "aht20.h"
 
-uint8_t AHT20::I2C_ADDR = 0x38;
 uint8_t AHT20::STATUS_OK = 0x18;
 
-uint8_t AHT20::init(){
+AHT20::AHT20(){ }
+
+uint8_t AHT20::begin(){
   // get sensor status
-  Wire.beginTransmission(AHT20::I2C_ADDR);
+  Wire.beginTransmission(AHT20_I2C_ADDR);
   Wire.write(0x71);
   Wire.endTransmission();
 
-  uint8_t c = Wire.requestFrom(AHT20::I2C_ADDR, (uint8_t)1);
+  uint8_t c = Wire.requestFrom(AHT20_I2C_ADDR, 1);
 
   // unexpected bytes receive
   if (c != 1) {
@@ -48,7 +49,7 @@ void AHT20::getValues(float *temp, float *humid){
   // measurement trigger command + 2 bytes of parameters
   uint8_t cmd[3] = { 0xAC, 0x33, 0x00 };
 
-  Wire.beginTransmission(AHT20::I2C_ADDR);
+  Wire.beginTransmission(AHT20_I2C_ADDR);
   Wire.write(cmd, 3);
   Wire.endTransmission();
 
@@ -57,7 +58,7 @@ void AHT20::getValues(float *temp, float *humid){
     delay(85); // delay > 80ms recommended
 
     // get sensor status
-    Wire.requestFrom(AHT20::I2C_ADDR, (uint8_t)1);
+    Wire.requestFrom(AHT20_I2C_ADDR, 1);
 
     if (Wire.available()) {
       uint8_t status = Wire.read();
@@ -69,7 +70,7 @@ void AHT20::getValues(float *temp, float *humid){
 
   uint8_t res[7];
   uint8_t i = 0;
-  Wire.requestFrom(AHT20::I2C_ADDR, (uint8_t)7);
+  Wire.requestFrom(AHT20_I2C_ADDR, 7);
 
   while (Wire.available()) {
     res[i++] = Wire.read();
