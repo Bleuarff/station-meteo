@@ -19,7 +19,6 @@ const unsigned long CLOCK_CHECK_INTERVAL = 4000;
 unsigned long lastClockCheck = -CLOCK_CHECK_INTERVAL;
 
 AHT20 aht20;
-bool AHTReady = false;
 float temp, humid;
 
 void setup() {
@@ -28,8 +27,7 @@ void setup() {
   delay(2000);
   Serial.println("** Ganymede starting **");
 
-  uint8_t error = aht20.begin();
-  AHTReady = (error == 0);
+  aht20.begin();
 }
 
 void loop() {
@@ -51,7 +49,7 @@ void loop() {
     //  - send them to base station
     //  - sleep
 
-    if (AHTReady) {
+    if (aht20.isReady) {
       // Retrieve value from temp & humidity sensors
       aht20.getValues(&temp, &humid);
       Serial.printf("T: %2.1f°\tH: %2.1f%%\n", temp, humid);

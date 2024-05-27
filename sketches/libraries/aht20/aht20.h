@@ -15,7 +15,8 @@ class AHT20 {
     static uint8_t STATUS_OK;
   public:
     AHT20();
-    uint8_t begin();
+    bool isReady;
+    void begin();
     void getValues(float *temp, float *humid);
 };
 

@@ -12,7 +12,7 @@ uint8_t AHT20::STATUS_OK = 0x18;
 
 AHT20::AHT20(){ }
 
-uint8_t AHT20::begin(){
+void AHT20::begin(){
   // get sensor status
   Wire.beginTransmission(AHT20_I2C_ADDR);
   Wire.write(0x71);
@@ -23,12 +23,12 @@ uint8_t AHT20::begin(){
   // unexpected bytes receive
   if (c != 1) {
     Serial.printf("AHT returns %i bytes, expected 1.\n", c);
-    return -1;
+    return;
   }
 
   if (Wire.available() == 0) {
     Serial.println("AHT is not available");
-    return -2;
+    return;
   }
 
   uint8_t status = Wire.read();
@@ -36,11 +36,11 @@ uint8_t AHT20::begin(){
   // Calibration required
   if (status != AHT20::STATUS_OK){
     Serial.printf("AHT20 status: %i\n", status);
-    return -3;
+    return;
   }
 
+  isReady = true;
   delay(10); // delay after init, before sending a read command
-  return 0;
 }
 
 // Get readings from sensor and compute values
