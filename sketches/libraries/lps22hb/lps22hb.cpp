@@ -10,8 +10,7 @@
 LPS22HB::LPS22HB(){
 }
 
-
-// Write control register to ensure correct configuration
+// Write control registers to ensure correct configuration
 uint8_t LPS22HB::begin(){
   // set low power mode
   write(LPS22HB_RES_CONF, 0x0);
@@ -19,13 +18,7 @@ uint8_t LPS22HB::begin(){
   return 0;
 }
 
-// Get and return value of given register
-uint8_t LPS22HB::read(uint8_t reg) {
-	uint8_t buf[1];
-	read(reg, buf, 1);
-	return buf[0];
-}
-
+// read bytes from device, starting at register reg
 void LPS22HB::read(uint8_t reg, uint8_t buf[], uint8_t len){
   Wire.beginTransmission(LPS22HB_I2C_ADDR);
   Wire.write(reg);
@@ -47,17 +40,18 @@ uint8_t LPS22HB::write(uint8_t reg, uint8_t value){
 }
 
 // check status register for data availability
-uint8_t LPS22HB::status(uint8_t status) {
-	int count = 1000;
+uint8_t LPS22HB::checkStatus(uint8_t expected) {
+	int iters = 1000;
 	uint8_t data = 0xff;
 	do {
-		data = read(LPS22HB_STATUS_REG);
-		--count;
-		if (count < 0)
-			break;
-	} while ((data & status) == 0);
+		read(LPS22HB_STATUS_REG, &data, 1);
 
-	if (count < 0)
+		if (--iters < 0)
+			break;
+
+	} while ((data & expected) == 0);
+
+	if (iters < 0)
 		return -1;
 	else
 		return 0;
@@ -68,7 +62,8 @@ void LPS22HB::getValues(float *pressure, float *temperature){
 	// Trigger one-shot value, with register auto-increment to read all bytes at once.
   write(LPS22HB_CTRL_REG2, 0b10001);
 
-  if (status(0b11) < 0){
+	// await both temp and pressure
+  if (checkStatus(0b11) < 0){
     *pressure = *temperature = -1.0f;
 		return;
   }

@@ -34,10 +34,9 @@
 
 class LPS22HB {
   private:
-    uint8_t read(uint8_t reg);
     void read(uint8_t reg, uint8_t buf[], uint8_t len);
     uint8_t write(uint8_t reg, uint8_t value);
-    uint8_t status(uint8_t status);
+    uint8_t checkStatus(uint8_t status);
   public:
     LPS22HB();
     uint8_t begin();
