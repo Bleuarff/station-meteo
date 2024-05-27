@@ -10,11 +10,11 @@
 LPS22HB::LPS22HB(){
 }
 
+
+// Write control register to ensure correct configuration
 uint8_t LPS22HB::begin(){
   // set low power mode
   write(LPS22HB_RES_CONF, 0x0);
-
-  // set REG1 register with default values
   write(LPS22HB_CTRL_REG1, 0x0);
   return 0;
 }
@@ -28,6 +28,19 @@ uint8_t LPS22HB::read(uint8_t reg) {
 	return Wire.read();
 }
 
+// void read(uint8_t reg, uint8_t buf[], uint8_t len){
+//   Wire.beginTransmission(addr);
+//   Wire.write(reg);
+//   Wire.endTransmission();
+//   Wire.requestFrom(addr, len);
+
+//   uint8_t i = 0;
+//   while(Wire.available()){
+//     buf[i++] = Wire.read();
+//   }
+// }
+
+// Write value at register reg
 uint8_t LPS22HB::write(uint8_t reg, uint8_t value){
   Wire.beginTransmission(LPS22HB_I2C_ADDR);
 	Wire.write(reg);
@@ -54,7 +67,7 @@ uint8_t LPS22HB::status(uint8_t status) {
 void LPS22HB::getValues(float *pressure, float *temperature){
   write(LPS22HB_CTRL_REG2, (uint8_t)1);
 
-  if (status(0x1) < 0){
+  if (status(0b11) < 0){
     *pressure = *temperature = -1.0f;
 		return;
   }
