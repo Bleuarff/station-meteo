@@ -5,7 +5,7 @@
 
 #include "Arduino.h"
 #include "Wire.h"
-#include "lps22.h"
+#include "lps22hb.h"
 
 LPS22HB::LPS22HB(){
 }

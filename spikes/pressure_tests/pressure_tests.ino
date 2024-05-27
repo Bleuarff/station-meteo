@@ -3,7 +3,7 @@
 */
 
 #include <Wire.h>
-#include <lps22.h>
+#include <lps22hb.h>
 
 uint8_t addr = 0x5D;
 
