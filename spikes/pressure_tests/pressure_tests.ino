@@ -5,8 +5,6 @@
 #include <Wire.h>
 #include <lps22hb.h>
 
-uint8_t addr = 0x5D;
-
 LPS22HB lps22;
 
 void setup() {
@@ -17,7 +15,6 @@ void setup() {
   Serial.println("--LPS22HB Tests--");
 
   lps22.begin();
-  Serial.println("LPS22 OK");
 
   // set low power mode
   // Wire.beginTransmission(addr);

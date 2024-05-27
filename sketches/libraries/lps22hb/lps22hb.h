@@ -29,11 +29,13 @@
 #define LPS22HB_TEMP_OUT_L	0X2B //LSB
 #define LPS22HB_TEMP_OUT_H	0X2C //MSB
 
+// Sensor i2c address
 #define LPS22HB_I2C_ADDR 0x5D
 
 class LPS22HB {
   private:
     uint8_t read(uint8_t reg);
+    void read(uint8_t reg, uint8_t buf[], uint8_t len);
     uint8_t write(uint8_t reg, uint8_t value);
     uint8_t status(uint8_t status);
   public:
