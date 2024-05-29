@@ -1274,7 +1274,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 68.58) (xy 152.4 68.58)
+			(xy 83.82 68.58) (xy 116.84 68.58)
 		)
 		(stroke
 			(width 0)
@@ -1301,16 +1301,6 @@
 			(type default)
 		)
 		(uuid "63561b3f-2d51-4a41-9061-678273a320f0")
-	)
-	(wire
-		(pts
-			(xy 148.59 85.09) (xy 152.4 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6dc09248-441e-49e8-a22e-2e4055af2cbf")
 	)
 	(wire
 		(pts
@@ -1394,6 +1384,16 @@
 	)
 	(wire
 		(pts
+			(xy 119.38 90.17) (xy 116.84 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a81a00ab-5304-418e-b318-79764d37ca70")
+	)
+	(wire
+		(pts
 			(xy 148.59 87.63) (xy 160.02 87.63)
 		)
 		(stroke
@@ -1434,16 +1434,6 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 85.09) (xy 152.4 68.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eaab58ac-b05f-4a2a-9128-b53bcb681e33")
-	)
-	(wire
-		(pts
 			(xy 99.06 105.41) (xy 99.06 110.49)
 		)
 		(stroke
@@ -1461,6 +1451,16 @@
 			(type default)
 		)
 		(uuid "fc187457-23a2-4cca-aa43-daef4503ae64")
+	)
+	(wire
+		(pts
+			(xy 116.84 90.17) (xy 116.84 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fd277c85-8f82-46f6-8205-d69e003c3343")
 	)
 	(symbol
 		(lib_id "meteostation_lib:HTCC-AB02")
