@@ -1,3 +1,5 @@
 *.zip
 *.FCBak
 *.lck
+
+schematics/#auto_saved_files#
