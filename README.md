@@ -39,12 +39,13 @@ Name | Url
 -|-
 AHT20 | https://asairsensors.com/wp-content/uploads/2021/09/Data-Sheet-AHT20-Humidity-and-Temperature-Sensor-ASAIR-V1.0.03.pdf
 LPS22HB | https://www.mouser.fr/pdfdocs/enDM00140895.pdf
-Screen | https://learn.adafruit.com/adafruit-2-13-eink-display-breakouts-and-featherwing
+SCD40 | https://sensirion.com/media/documents/48C4B7FB/64C134E7/Sensirion_SCD4x_Datasheet.pdf
+Screen | https://learn.adafruit.com/adafruit-2-13-eink-display-breakouts-and-featherwings
 CubeCell | https://resource.heltec.cn/download/CubeCell/HTCC-AB02A/HTCC-AB02A_PinoutDiagram.pdf <br> https://docs.heltec.org/en/node/asr650x/htcc_ab02/index.html <br>
 
 # Setup
 
 - Create a symlink for each library:
 ````bash
-ln -s ~/dev/station-meteo/sketches/libraries/aht20 ~/dev/station-meteo/sketches/libraries/lps22 ~/Arduino/libraries/
+ln -s ~/dev/station-meteo/sketches/libraries/aht20 ~/dev/station-meteo/sketches/libraries/lps22hb ~/Arduino/libraries/
 ````
