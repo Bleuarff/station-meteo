@@ -1508,26 +1508,16 @@
 		(uuid "5384cf3e-2fe0-4d21-bf66-9131379d880b")
 	)
 	(junction
+		(at 120.65 72.39)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "63f82dc2-3acc-4566-8b2c-04833fb778c5")
+	)
+	(junction
 		(at 104.14 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f3615c95-045a-4f73-9aba-ad83e54a5e5f")
-	)
-	(junction
-		(at 161.29 72.39)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f5af4092-6aa0-4dd9-8ec9-dbf4b7aa225e")
-	)
-	(wire
-		(pts
-			(xy 151.13 72.39) (xy 161.29 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0682973d-5bdd-42a7-a98b-b60af3d125d6")
 	)
 	(wire
 		(pts
@@ -1551,7 +1541,7 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 92.71) (xy 121.92 92.71)
+			(xy 110.49 92.71) (xy 123.19 92.71)
 		)
 		(stroke
 			(width 0)
@@ -1591,7 +1581,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 102.87) (xy 113.03 102.87)
+			(xy 123.19 102.87) (xy 113.03 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1701,6 +1691,16 @@
 	)
 	(wire
 		(pts
+			(xy 120.65 54.61) (xy 161.29 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6956a4bc-c1b9-4752-a147-343c7c0eb9f4")
+	)
+	(wire
+		(pts
 			(xy 157.48 50.8) (xy 104.14 50.8)
 		)
 		(stroke
@@ -1711,7 +1711,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 87.63) (xy 151.13 87.63)
+			(xy 193.04 87.63) (xy 152.4 87.63)
 		)
 		(stroke
 			(width 0)
@@ -1791,7 +1791,7 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 72.39) (xy 210.82 72.39)
+			(xy 152.4 72.39) (xy 210.82 72.39)
 		)
 		(stroke
 			(width 0)
@@ -1801,7 +1801,27 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 74.93) (xy 157.48 74.93)
+			(xy 120.65 72.39) (xy 123.19 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "95190275-5d6f-4181-982d-2c336045f741")
+	)
+	(wire
+		(pts
+			(xy 120.65 72.39) (xy 120.65 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9beae05f-7490-4d07-84c7-2f2d6073b2e1")
+	)
+	(wire
+		(pts
+			(xy 152.4 74.93) (xy 157.48 74.93)
 		)
 		(stroke
 			(width 0)
@@ -1841,7 +1861,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 97.79) (xy 175.26 97.79)
+			(xy 152.4 97.79) (xy 175.26 97.79)
 		)
 		(stroke
 			(width 0)
@@ -1871,7 +1891,7 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 72.39) (xy 121.92 72.39)
+			(xy 87.63 72.39) (xy 120.65 72.39)
 		)
 		(stroke
 			(width 0)
@@ -1891,7 +1911,7 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 33.02) (xy 161.29 72.39)
+			(xy 161.29 33.02) (xy 161.29 54.61)
 		)
 		(stroke
 			(width 0)
@@ -1911,7 +1931,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 90.17) (xy 190.5 90.17)
+			(xy 152.4 90.17) (xy 190.5 90.17)
 		)
 		(stroke
 			(width 0)
@@ -1941,7 +1961,7 @@
 	)
 	(wire
 		(pts
-			(xy 115.57 105.41) (xy 121.92 105.41)
+			(xy 115.57 105.41) (xy 123.19 105.41)
 		)
 		(stroke
 			(width 0)
@@ -1951,7 +1971,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 95.25) (xy 121.92 95.25)
+			(xy 104.14 95.25) (xy 123.19 95.25)
 		)
 		(stroke
 			(width 0)
@@ -2011,7 +2031,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 100.33) (xy 177.8 100.33)
+			(xy 152.4 100.33) (xy 177.8 100.33)
 		)
 		(stroke
 			(width 0)
@@ -2021,7 +2041,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 92.71) (xy 210.82 92.71)
+			(xy 152.4 92.71) (xy 210.82 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2031,7 +2051,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 95.25) (xy 172.72 95.25)
+			(xy 152.4 95.25) (xy 172.72 95.25)
 		)
 		(stroke
 			(width 0)
@@ -2051,7 +2071,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 100.33) (xy 110.49 100.33)
+			(xy 123.19 100.33) (xy 110.49 100.33)
 		)
 		(stroke
 			(width 0)
@@ -2061,7 +2081,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 74.93) (xy 118.11 74.93)
+			(xy 123.19 74.93) (xy 118.11 74.93)
 		)
 		(stroke
 			(width 0)
@@ -2186,7 +2206,7 @@
 	)
 	(symbol
 		(lib_id "meteostation_lib:HTCC-AB02")
-		(at 134.62 60.96 0)
+		(at 135.89 60.96 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2195,7 +2215,7 @@
 		(fields_autoplaced yes)
 		(uuid "415dec60-a84a-4817-a42a-2d9b304bc573")
 		(property "Reference" "HTCC-AB02A3"
-			(at 136.525 59.69 0)
+			(at 137.795 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2203,7 +2223,7 @@
 			)
 		)
 		(property "Value" "~"
-			(at 136.525 62.23 0)
+			(at 137.795 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2211,7 +2231,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 134.62 60.96 0)
+			(at 135.89 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2220,7 +2240,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 134.62 60.96 0)
+			(at 135.89 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2229,7 +2249,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 134.62 60.96 0)
+			(at 135.89 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
