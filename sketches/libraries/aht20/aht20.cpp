@@ -11,18 +11,32 @@
 AHT20::AHT20(){ }
 
 void AHT20::begin(){
-  // get sensor status
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(0x71);
-  Wire.endTransmission();
+  isReady = false;
+  delay(100); // wait >= 100ms after power-on
 
-  uint8_t c = Wire.requestFrom(I2C_ADDR, (uint8_t)1);
+  uint8_t c = 0;
+  int i = 0;
+  long start = millis();
+  do{
+    // get sensor status
+    Wire.beginTransmission(I2C_ADDR);
+    Wire.write(0x71);
+    Wire.endTransmission();
 
+    c = Wire.requestFrom(I2C_ADDR, (uint8_t)1);
+  
+    if (c != 1)
+      delay(100);
+  }
+  while (c != 1 && i++ < 100);
+
+  long duration = millis() - start;
   // unexpected bytes receive
   if (c != 1) {
-    Serial.printf("AHT returns %i bytes, expected 1.\n", c);
+    Serial.printf("AHT returns %i bytes, expected 1. [%ims]\n", c, duration);
     return;
   }
+  Serial.printf("AHT20 ready [%dms]\n", duration);
 
   if (Wire.available() == 0) {
     Serial.println("AHT is not available");

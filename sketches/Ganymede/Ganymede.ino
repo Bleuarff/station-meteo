@@ -13,11 +13,11 @@
 
 // interval between loop checks
 // actual production value: 5min (5 * 60 * 1000)
-const unsigned long CLOCK_CHECK_INTERVAL = 4000;
+const unsigned long SLEEP_INTERVAL = 10000;
 
+uint8_t lowpowermode = 0;
 
-// timestamp of last loop processing
-unsigned long lastClockCheck = -CLOCK_CHECK_INTERVAL;
+static TimerEvent_t wakeup;
 
 AHT20 aht20;
 LPS22HB lps22;
@@ -26,41 +26,56 @@ float temp, humid, pressure, temp2;
 
 void setup() {
   Serial.begin(115200);
+  pinMode(Vext, OUTPUT);
+  digitalWrite(Vext, LOW);  // power i2c sensors
   Wire.begin();
+
   delay(2000);
   Serial.println("** Ganymede starting **");
 
-  aht20.begin();
-  lps22.begin();
+  TimerInit(&wakeup, onWakeup);
+}
+
+// Prepare for sleep: close i2c bus, pull Vext OFF
+void onSleep() {
+  Wire.end();
+  delay(100);
+  digitalWrite(Vext, HIGH);
+  TimerSetValue(&wakeup, SLEEP_INTERVAL);
+  TimerStart(&wakeup);
+  lowpowermode = 1;
+}
+
+// wake up: pull Vext ON and start i2c bus
+void onWakeup() {
+  digitalWrite(Vext, LOW);
+  Wire.begin();
+  lowpowermode = 0;
+  delay(500);
 }
 
 void loop() {
-  unsigned long ts = millis();
-  unsigned long itv;
-
-  // compute interval since last check
-  if (ts >= lastClockCheck)
-    itv = ts - lastClockCheck;
-  else
-    // rollover occurred, compute interval accordingly
-    itv = UINT32_MAX - lastClockCheck + ts + 1;
-
-  // do its job only if interval is sufficient
-  if (itv >= CLOCK_CHECK_INTERVAL) {
-
-    // TODO:
-    //  - get all sensor values
-    //  - send them to base station
-    //  - sleep
-
-    if (aht20.isReady) {
-      // Retrieve value from temp & humidity sensors
-      aht20.getValues(&temp, &humid);
-    }
-
-    lps22.getValues(&pressure, &temp2);
-
-    Serial.printf("T: %2.1f°\tH: %2.1f%%\tP: %4.1fhPa\tT2: %2.1f°\n", temp, humid, pressure, temp2);
-    lastClockCheck = millis();
+  if (lowpowermode){
+    // put cpu in deep sleep
+    lowPowerHandler();
   }
+  else {
+    // take a measure before going back to sleep
+    takeMeasure();
+    delay(100);
+    onSleep();
+  }
+}
+
+void takeMeasure() {
+  aht20.begin();
+  lps22.begin();
+
+  if (aht20.isReady) {
+    // Retrieve value from temp & humidity sensors
+    aht20.getValues(&temp, &humid);
+  }
+
+  lps22.getValues(&pressure, &temp2);
+  Serial.printf("T: %2.1f°\tH: %2.1f%%\tP: %4.1fhPa\tT2: %2.1f°\n", temp, humid, pressure, temp2);
 }
