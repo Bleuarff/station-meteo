@@ -21,11 +21,10 @@ void setup() {
 
   Serial.println("Waiting for first measurement... (5 sec)");
 }
-  /
 
 
 void loop() {
-  delay(1000);
+  delay(6000);
   
   bool ready = false;
   scd4x.getDataReadyFlag(ready);
